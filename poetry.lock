@@ -47,12 +47,34 @@ gibberish = ["gibberish-detector"]
 word_list = ["pyahocorasick"]
 
 [[package]]
+name = "direnv"
+version = "2020.12.3"
+description = "direnv (environment switcher) python implementation"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+env-file = "*"
+
+[[package]]
 name = "distlib"
 version = "0.3.1"
 description = "Distribution utilities"
 category = "main"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "env-file"
+version = "2020.12.3"
+description = ".env file handler. required for django, docker, etc"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+values = "*"
 
 [[package]]
 name = "filelock"
@@ -161,6 +183,14 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 brotli = ["brotlipy (>=0.6.0)"]
 
 [[package]]
+name = "values"
+version = "2020.12.3"
+description = "values.get(input) - create list from input"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "virtualenv"
 version = "20.4.6"
 description = "Virtual Python Environment builder"
@@ -181,7 +211,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "251f528e4cce3f110dba11f2a6de9e798ef535fe38d093f5404b8bc848c81eac"
+content-hash = "6af24c5d464b31db8da12ad76f19a7261fe8f08ec7563a51a78335f77983c711"
 
 [metadata.files]
 appdirs = [
@@ -204,9 +234,15 @@ detect-secrets = [
     {file = "detect_secrets-1.1.0-py2.py3-none-any.whl", hash = "sha256:be8cca3dc65f6fd637f5dec9f583f1cf4a680dc1a580b3d2e65a5ac7a277456a"},
     {file = "detect_secrets-1.1.0.tar.gz", hash = "sha256:68250b31bc108f665f05f0ecfb34f92423280e48e65adbb887fdf721ed909627"},
 ]
+direnv = [
+    {file = "direnv-2020.12.3.tar.gz", hash = "sha256:74ecba006eb12843fffd20e361edc2d4a043b4465c550b506ee626f42f7dd635"},
+]
 distlib = [
     {file = "distlib-0.3.1-py2.py3-none-any.whl", hash = "sha256:8c09de2c67b3e7deef7184574fc060ab8a793e7adbb183d942c389c8b13c52fb"},
     {file = "distlib-0.3.1.zip", hash = "sha256:edf6116872c863e1aa9d5bb7cb5e05a022c519a4594dc703843343a9ddd9bff1"},
+]
+env-file = [
+    {file = "env-file-2020.12.3.tar.gz", hash = "sha256:34cbe53b99afaa81209953ee16febcd87121034aa7bf64e229802f51b9c38d66"},
 ]
 filelock = [
     {file = "filelock-3.0.12-py3-none-any.whl", hash = "sha256:929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"},
@@ -274,6 +310,9 @@ toml = [
 urllib3 = [
     {file = "urllib3-1.26.4-py2.py3-none-any.whl", hash = "sha256:2f4da4594db7e1e110a944bb1b551fdf4e6c136ad42e4234131391e21eb5b0df"},
     {file = "urllib3-1.26.4.tar.gz", hash = "sha256:e7b021f7241115872f92f43c6508082facffbd1c048e3c6e2bb9c2a157e28937"},
+]
+values = [
+    {file = "values-2020.12.3.tar.gz", hash = "sha256:30b1b74674b546188b77d8398de17ea49f3692191114da43c703bda5b54402f5"},
 ]
 virtualenv = [
     {file = "virtualenv-20.4.6-py2.py3-none-any.whl", hash = "sha256:307a555cf21e1550885c82120eccaf5acedf42978fd362d32ba8410f9593f543"},

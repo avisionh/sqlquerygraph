@@ -9,3 +9,6 @@
 
 # jupyter notebooks
 .ipynb_checkpoints
+
+# environment
+.env
