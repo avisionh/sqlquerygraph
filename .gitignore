@@ -1,0 +1,11 @@
+# pycharm
+.idea
+
+# secrets
+.secrets
+
+# pyenv
+.python-version
+
+# jupyter notebooks
+.ipynb_checkpoints
