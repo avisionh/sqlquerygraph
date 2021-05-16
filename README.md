@@ -3,6 +3,8 @@
 
 Parse your SQL queries and represent their structure as a graph.
 
+Currently, we implement the ability of represent how each of the tables in a set of SQL query scripts depend on each other.
+
 ## Requirements
 To run the code in here, ensure your system meets the following requirements:
 - Unix-like operating system (macOS, Linux, ...);
