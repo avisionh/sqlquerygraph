@@ -69,3 +69,44 @@ class Extractor:
         if print_tree:
             pprint(object=query_json)
         return query_json
+
+    @staticmethod
+    def extract_from_json(obj: dict, key: str) -> list:
+        """
+        Recursively fetch values from a nested JSON.
+
+        For our purposes, extract where key is 'from' allows extraction of *most* table names after a `FROM` clause.
+            - It does not extract the table names when the name is nested in a subquery.
+            - Nor does it extract table names in '<TYPE> JOIN` clauses.
+        To achieve above two, need to extract where the key is 'value' and compare with actual table names.
+        This is because the values returned when key is 'value' are table names, column names etc.
+        Reference
+            -  https://hackersandslackers.com/extract-data-from-complex-json-python/
+        :param obj: Dictionary to extract values from.
+        :param key: String of the value you want to extract.
+        :return: List of values for the key.
+        """
+        arr = []
+
+        def extract(obj: Union[dict, list], arr: list, key: str) -> list:
+            """
+            Recusively search for values of key in a JSON tree.
+
+            :param obj: Dictionary to extract values from.
+            :param arr: List to store extracted values to.
+            :param key: String of the dictionary key to extract associated value from.
+            :return: List of the extracted values.
+            """
+            if isinstance(obj, dict):
+                for k, v in obj.items():
+                    if isinstance(v, (dict, list)):
+                        extract(obj=v, arr=arr, key=key)
+                    elif k == key:
+                        arr.append(v)
+            elif isinstance(obj, list):
+                for item in obj:
+                    extract(obj=item, arr=arr, key=key)
+            return arr
+
+        values = extract(obj=obj, arr=arr, key=key)
+        return values
