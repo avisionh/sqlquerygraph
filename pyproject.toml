@@ -11,6 +11,7 @@ pre-commit = "^2.12.1"
 detect-secrets = "^1.1.0"
 direnv = "^2020.12.3"
 flake8 = "^3.9.2"
+moz-sql-parser = "^4.40.21126"
 
 [tool.poetry.dev-dependencies]
 

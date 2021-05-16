@@ -3,6 +3,9 @@ from typing import Union
 import os
 import re
 
+from moz_sql_parser import parse
+from pprint import pprint
+
 
 class Extractor:
     """
@@ -52,3 +55,17 @@ class Extractor:
                 query = query.replace(txt, "")
 
         return query
+
+    @staticmethod
+    def parse_query(query: str, print_tree: bool = False) -> dict:
+        """
+        Parse a query into a JSON parse-tree.
+
+        :param query: String of the SQL query to parse as a JSON parse-tree.
+        :param print_tree: Boolean to print the JSON parse-tree.
+        :return: Dictionary of the query as a JSON parse-tree.
+        """
+        query_json = parse(sql=query)
+        if print_tree:
+            pprint(object=query_json)
+        return query_json

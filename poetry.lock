@@ -125,6 +125,76 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "mo-dots"
+version = "4.22.21108"
+description = "More Dots! Dot-access to Python dicts like Javascript"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+mo-future = "3.147.20327"
+mo-imports = "3.149.20327"
+
+[[package]]
+name = "mo-future"
+version = "3.147.20327"
+description = "More future! Make Python 2/3 compatibility a bit easier"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "mo-imports"
+version = "3.149.20327"
+description = "More Imports! - Delayed importing"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+mo-future = "3.147.20327"
+
+[[package]]
+name = "mo-kwargs"
+version = "4.22.21108"
+description = "More KWARGS! Let call parameters override kwargs"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+mo-dots = "4.22.21108"
+mo-future = "3.147.20327"
+
+[[package]]
+name = "mo-logs"
+version = "4.23.21108"
+description = "More Logs! Structured Logging and Exception Handling"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+mo-dots = "4.22.21108"
+mo-future = "3.147.20327"
+mo-imports = "3.149.20327"
+mo-kwargs = "4.22.21108"
+
+[[package]]
+name = "moz-sql-parser"
+version = "4.40.21126"
+description = "Extract Parse Tree from SQL"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+mo-dots = "4.22.21108"
+mo-future = "3.147.20327"
+mo-logs = "4.23.21108"
+
+[[package]]
 name = "nodeenv"
 version = "1.6.0"
 description = "Node.js virtual environment builder"
@@ -248,7 +318,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "09173b5e497218e0d74966bdf08a78ebbfbc7322863b44a255d4e01538efec91"
+content-hash = "6dbd677bb57cbbb6b000fc84f6c0fc06daa173f8e22a50b485746b6c566e1ef6"
 
 [metadata.files]
 appdirs = [
@@ -300,6 +370,24 @@ idna = [
 mccabe = [
     {file = "mccabe-0.6.1-py2.py3-none-any.whl", hash = "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42"},
     {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
+]
+mo-dots = [
+    {file = "mo-dots-4.22.21108.tar.gz", hash = "sha256:f9f2f9a6e44e214959aecd55857b6df487b8e86daf51334e2e982d47ea33ed23"},
+]
+mo-future = [
+    {file = "mo-future-3.147.20327.tar.gz", hash = "sha256:4aafcf859e4657bc11b04ee9791321e2d44702604ae01cac7c412468cb6a513f"},
+]
+mo-imports = [
+    {file = "mo-imports-3.149.20327.tar.gz", hash = "sha256:32e3dc720c84765224d29ed7e9d6972a369d41d756e6f26ddb5b7aa01241331d"},
+]
+mo-kwargs = [
+    {file = "mo-kwargs-4.22.21108.tar.gz", hash = "sha256:9c9d00ab86f1f75013193807d90cad17cbc515384cf3b17b8aff3104a300f7ce"},
+]
+mo-logs = [
+    {file = "mo-logs-4.23.21108.tar.gz", hash = "sha256:de4136a7ce215ecbfd7a368588be0a3f1fd8a6521dc2d4aae57cc1c3ba299aab"},
+]
+moz-sql-parser = [
+    {file = "moz-sql-parser-4.40.21126.tar.gz", hash = "sha256:b3d37cc8ff118d86009aa12646791549537ec0ae8ac312efd4641289c8eee080"},
 ]
 nodeenv = [
     {file = "nodeenv-1.6.0-py2.py3-none-any.whl", hash = "sha256:621e6b7076565ddcacd2db0294c0381e01fd28945ab36bcf00f41c5daf63bef7"},
