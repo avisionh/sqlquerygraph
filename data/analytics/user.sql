@@ -10,7 +10,8 @@ USING (
         name
         ,email
         ,'committer' AS user_type
-    FROM analytics.committer)
+    FROM analytics.committer
+)
 ON FALSE
 WHEN NOT MATCHED THEN
     INSERT ROW

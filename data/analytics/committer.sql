@@ -7,7 +7,8 @@ USING (
         ,committer.tz_offset AS tz_offset
         ,committer.date.seconds AS date_seconds
         ,committer.date.nanos AS date_nanos
-    FROM `bigquery-public-data.github_repos.commits`)
+    FROM `bigquery-public-data.github_repos.commits`
+)
 ON FALSE
 WHEN NOT MATCHED THEN
     INSERT ROW

@@ -12,7 +12,8 @@ USING (
         ,message
         ,repo_name
         ,difference_truncated
-    FROM `bigquery-public-data.github_repos.commits`)
+    FROM `bigquery-public-data.github_repos.commits`
+)
 ON FALSE
 WHEN NOT MATCHED THEN
     INSERT ROW
