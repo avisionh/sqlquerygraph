@@ -20,18 +20,19 @@ class Extractor:
         self.script_dir = script_dir
         self.schema = schema
 
-    def read_query(self, file: str) -> str:
+    def read_query(self, file: str) -> (str, str):
         """
         Reads a SQL file in.
+        Note: Relies on SQL script being named the same as table or View it is creating.
 
         :param file: String of the file to read query from.
-        :return: String of the SQL query from the file.
+        :return: Tuple of strings of the table name and SQL query from the file.
         """
-        _, file_extension = os.path.splitext(p=file)
+        file_name, file_extension = os.path.splitext(p=file)
         if file_extension == ".sql":
             with open(file=os.path.join(self.script_dir, file), mode="r") as f:
                 query = f.read()
-            return query
+            return file_name, query
         else:
             raise Exception(
                 f"Passed in a {file_extension} file. \n"
@@ -129,10 +130,9 @@ class Extractor:
         queries, jsons, dicts = {}, {}, {}
         reference_datasets = tuple([f"{txt}." for txt in reference_datasets])
         for file_name in tqdm(os.listdir(path=self.script_dir)):
-
             if verbose:
                 print(f"Reading query {file_name}...\n")
-            query = self.read_query(file=file_name)
+            file_name, query = self.read_query(file=file_name)
             queries[file_name] = query
 
             if str_to_remove is not None:
@@ -168,7 +168,7 @@ class Extractor:
             table_join = [
                 txt for txt in table_value if str(txt).startswith(reference_datasets)
             ]
-            tables = list(set(table_from + table_join))
+            tables = sorted(list(set(table_from + table_join)))
 
             # store in dictionary
             dicts[f"{self.schema}.{file_name}"] = tables
