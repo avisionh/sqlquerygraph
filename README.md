@@ -1,9 +1,13 @@
 # sqlquerygraph
-[![build status](https://github.com/avisionh/sqlquerygraph/workflows/pytesting/badge.svg)](https://github.com/avisionh/sqlqueryraph/actions) [![CodeFactor](https://www.codefactor.io/repository/github/avisionh/sqlquerygraph/badge)](https://www.codefactor.io/repository/github/avisionh/sqlquerygraph) [![License: MIT](https://img.shields.io/badge/License-MIT-informational.svg)](https://opensource.org/licenses/MIT) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![build status](https://github.com/avisionh/sqlquerygraph/workflows/pytesting/badge.svg)](https://github.com/avisionh/sqlqueryraph/actions)
+[![](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![CodeFactor](https://www.codefactor.io/repository/github/avisionh/sqlquerygraph/badge)](https://www.codefactor.io/repository/github/avisionh/sqlquerygraph)
+[![License: MIT](https://img.shields.io/badge/License-MIT-informational.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Parse your SQL queries and represent their structure as a graph.
 
-Currently, we implement the ability of represent how each of the tables in a set of SQL query scripts depend on each other.
+Currently, we implement the ability of representing how each of the tables in a set of SQL query scripts depend on each other.
 
 ## Requirements
 To run the code in here, ensure your system meets the following requirements:
@@ -13,8 +17,6 @@ To run the code in here, ensure your system meets the following requirements:
   use the environment variables - see [below](#allowingtrusting-envrc);
 - Python 3.8 or above; and
 - [Poetry](https://python-poetry.org/docs/) installed.
-
-Parse your SQL queries and represent their structure as a graph.
 
 Note there may be some Python IDE-specific requirements around loading environment variables, which are not considered here.
 
@@ -33,3 +35,6 @@ pre-commit install
 ```
 
 ***
+
+## Acknowledgements
+This builds on the excellent [moz-sql-parser](https://github.com/mozilla/moz-sql-parser) package.
