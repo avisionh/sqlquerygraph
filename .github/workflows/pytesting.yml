@@ -23,6 +23,9 @@ jobs:
       uses: abatilo/actions-poetry@v2.1.0
       with:
         poetry-version: ${{ matrix.poetry-version }}
+    - name: Install dependencies
+      run: |
+        poetry install
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
