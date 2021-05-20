@@ -122,7 +122,7 @@ class Extractor:
         """
         Extracts the table names and their dependencies from a set of .sql files.
 
-        :param reference_datasets: List of datasets/schema that the tables belong to.
+        :param reference_datasets: List of datasets/schema of database.
         :param str_to_remove: String or list of strings to remove from the query.
         :param verbose: Boolean to output steps taken and query after cleaning. Useful for debugging.
         :return: Dictionary of tables as keys and their dependent tables as values.
