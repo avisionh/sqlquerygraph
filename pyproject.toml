@@ -10,6 +10,7 @@ python = "^3.8"
 pre-commit = "^2.12.1"
 detect-secrets = "^1.1.0"
 direnv = "^2020.12.3"
+flake8 = "^3.9.2"
 
 [tool.poetry.dev-dependencies]
 
