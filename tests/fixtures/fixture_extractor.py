@@ -4,7 +4,7 @@ import pytest
 @pytest.fixture()
 def cleaned_user_activity():
     return (
-        "WITH cte_base AS ( "
+        " WITH cte_base AS ( "
         "SELECT b.name ,b.email ,'commit' AS activity_type ,COUNT(a.*) AS activity_count "
         "FROM analytics.commit AS a "
         "LEFT JOIN analytics.user AS b "
@@ -24,7 +24,7 @@ def cleaned_user_activity():
         "FROM ( "
         "SELECT name ,email ,'total' AS activity_type ,SUM(activity_count) AS activity_count "
         "FROM cte_base "
-        "GROUP BY name ,email ) ;"
+        "GROUP BY name ,email ) ; "
     )
 
 

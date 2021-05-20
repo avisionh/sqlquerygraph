@@ -40,7 +40,7 @@ class Extractor:
             )
 
     @staticmethod
-    def clean_query(query: str, str_to_remove: Union[str, list]) -> str:
+    def clean_query(query: str, str_to_remove: Union[str, list] = None) -> str:
         """
         Cleans a query so it can be parsed.
 
