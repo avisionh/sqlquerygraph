@@ -12,3 +12,6 @@
 
 # environment
 .env
+
+# django
+__pycache__/
