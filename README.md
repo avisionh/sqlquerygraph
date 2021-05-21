@@ -34,6 +34,20 @@ poetry install
 pre-commit install
 ```
 
+### Run neo4j graph database
+To install neo4j locally using Docker Compose, follow the below instructions:
+1. Install Docker
+    + For Mac OSX, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-mac/install/).
+    + For Linux, install Docker [here](https://docs.docker.com/engine/install/) and then follow these [instructions](https://docs.docker.com/compose/install/) to install docker-compose.
+    + For Windows, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-windows/install/).
+1. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
+    ```shell script
+    docker-compose up -d
+    ```
+1. If it's the first time you have downloaded the neo4j docker image, wait awhile (maybe an hour, depends on your machine specs). If you have downloaded the neo4j docker image before (such as going through these instructions), then wait a few minutes before launching neo4j locally via opening your web browser and entering the following web address:
+    - http://localhost:7474/browser/
+1. The default username and password will be `neo4j`. You can leave the other fields blank.
+
 ***
 
 ## Acknowledgements
