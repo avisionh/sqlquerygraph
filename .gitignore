@@ -15,3 +15,9 @@
 
 # django
 __pycache__/
+
+# data
+*.csv
+
+# outputs
+*.html

@@ -21,7 +21,7 @@ To run the code in here, ensure your system meets the following requirements:
 Note there may be some Python IDE-specific requirements around loading environment variables, which are not considered here.
 
 ### Set-up
-For quickstart set-up of the project, run the below in your shell:
+For quickstart set-up of the project, run the below in your shell/terminal:
 ```shell script
 # 1. read project-specific environment variables
 direnv allow
@@ -32,6 +32,11 @@ poetry install
 
 # 3. check adherence to good standards on every commit
 pre-commit install
+```
+
+To then extract the tables and their dependencies from the example SQL scripts in the `sql/` directory, run the following in your shell/terminal:
+```shell script
+python sqlquerygraph.py -sd 'sql' -ed 'neo4j' -rd 'github_repos' 'analytics' 'reporting'
 ```
 
 ### Run neo4j graph database

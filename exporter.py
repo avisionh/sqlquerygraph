@@ -63,7 +63,7 @@ def export_unique_names(data: pd.DataFrame, path_or_buf: str):
     data_frames = pd.concat(objs=frames, axis="index")
 
     for ds in data_frames["table_dataset"].unique():
-        df = data_frames[data_frames["table_layer"] == ds]
+        df = data_frames[data_frames["table_dataset"] == ds]
         df = df.drop_duplicates(subset="table_name")
         df.to_csv(path_or_buf=f"{path_or_buf}/{ds}_tables.csv", index=False)
 
@@ -83,7 +83,6 @@ def export_table_dependency(data: pd.DataFrame, path_or_buf: str):
             df_out = data.loc[
                 (mask_t_ds & mask_d_ds),
             ]
-            df_out = df_out.drop(columns=["table", "dependency"])
             df_out.to_csv(
                 path_or_buf=f"{path_or_buf}/{t_ds}_{d_ds}_dependency.csv", index=False
             )

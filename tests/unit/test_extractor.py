@@ -3,7 +3,7 @@ from extractor import Extractor
 
 def test_clean_query(query_user_activity, cleaned_user_activity):
     schema = "reporting"
-    dir_report = f"data/{schema}"
+    dir_report = f"sql/{schema}"
     extractor = Extractor(script_dir=dir_report, schema=schema)
     txt_remove = [
         f"MERGE {schema}.user_activity USING (",

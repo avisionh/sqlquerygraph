@@ -3,7 +3,7 @@ import pytest
 
 @pytest.fixture()
 def query_user_activity():
-    with open(file="data/reporting/user_activity.sql", mode="r") as f:
+    with open(file="sql/reporting/user_activity.sql", mode="r") as f:
         return f.read()
 
 
