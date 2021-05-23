@@ -2,6 +2,12 @@ import pytest
 
 
 @pytest.fixture()
+def query_user_activity():
+    with open(file="data/reporting/user_activity.sql", mode="r") as f:
+        return f.read()
+
+
+@pytest.fixture()
 def cleaned_user_activity():
     return (
         " WITH cte_base AS ( "
@@ -36,19 +42,4 @@ def extracted_reporting():
             "analytics.repo",
             "analytics.user",
         ]
-    }
-
-
-@pytest.fixture()
-def extracted_analytics():
-    return {
-        "analytics.repo": [
-            "github_repos.commits",
-            "github_repos.languages",
-            "github_repos.licenses",
-        ],
-        "analytics.author": ["github_repos.commits"],
-        "analytics.committer": ["github_repos.commits"],
-        "analytics.commit": ["github_repos.commits"],
-        "analytics.user": ["analytics.author", "analytics.committer"],
     }
