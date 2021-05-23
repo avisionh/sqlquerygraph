@@ -471,7 +471,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "a8b7b42d96b152e9a8fd58b71161823bc914c37ee846e2e9a1121168e874d320"
+content-hash = "bf0d8695b7bcb1c4144b9be6361e7cb68362475afe6f8f275f38b958e9bd4441"
 
 [metadata.files]
 appdirs = [

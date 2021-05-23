@@ -15,7 +15,6 @@ moz-sql-parser = "^4.40.21126"
 tqdm = "^4.60.0"
 pytest = "^6.2.4"
 pandas = "^1.2.4"
-numpy = "^1.20.3"
 
 [tool.poetry.dev-dependencies]
 

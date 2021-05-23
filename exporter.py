@@ -1,6 +1,5 @@
 from typing import Union
 import pandas as pd
-import numpy as np
 
 
 def convert_dict_to_df(data: dict) -> pd.DataFrame:
@@ -45,3 +44,46 @@ def separate_dataset_table(data: Union[pd.Series, pd.DataFrame]) -> pd.DataFrame
         data = data.drop(columns=col)
 
     return data
+
+
+def export_unique_names(data: pd.DataFrame, path_or_buf: str):
+    """
+    Concatenates and unions a dataframe so we we get unique table names. This is so we create nodes in neo4j.
+    :param data: Dataframe to get the names from.
+    :param path_or_buf: String of the directory to store files.
+    :return:
+    """
+    data_table = data[["table_dataset", "table_name"]]
+    data_dependency = data[["dependency_dataset", "dependency_name"]]
+    # rename so can union
+    data_dependency = data_dependency.rename(
+        columns={"dependency_dataset": "table_dataset", "dependency_name": "table_name"}
+    )
+    frames = [data_table, data_dependency]
+    data_frames = pd.concat(objs=frames, axis="index")
+
+    for ds in data_frames["table_dataset"].unique():
+        df = data_frames[data_frames["table_layer"] == ds]
+        df = df.drop_duplicates(subset="table_name")
+        df.to_csv(path_or_buf=f"{path_or_buf}/{ds}_tables.csv", index=False)
+
+
+def export_table_dependency(data: pd.DataFrame, path_or_buf: str):
+    """
+    Filters a dataframe by its table and dependency levels so it can be exported into neo4j.
+    :param data: Dataframe to filter by table and dependency.
+                Requires column to be called 'table_dataset' and 'dependency_dataset'.
+    :param path_or_buf: String of the directory to store files.
+    :return:
+    """
+    for t_ds in data["table_dataset"].unique():
+        mask_t_ds = data["table_dataset"] == t_ds
+        for d_ds in data["dependency_dataset"].unique():
+            mask_d_ds = data["dependency_dataset"] == d_ds
+            df_out = data.loc[
+                (mask_t_ds & mask_d_ds),
+            ]
+            df_out = df_out.drop(columns=["table", "dependency"])
+            df_out.to_csv(
+                path_or_buf=f"{path_or_buf}/{t_ds}_{d_ds}_dependency.csv", index=False
+            )
