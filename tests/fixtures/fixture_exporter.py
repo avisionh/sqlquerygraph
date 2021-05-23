@@ -28,3 +28,51 @@ def dict_as_df():
             ],
         }
     )
+
+
+@pytest.fixture()
+def df_separate_dataset_table():
+    return pd.DataFrame(
+        data={
+            "table_dataset": [
+                "analytics",
+                "analytics",
+                "analytics",
+                "analytics",
+                "analytics",
+                "analytics",
+                "analytics",
+                "analytics",
+            ],
+            "table_name": [
+                "author",
+                "commit",
+                "committer",
+                "repo",
+                "repo",
+                "repo",
+                "user",
+                "user",
+            ],
+            "dependency_dataset": [
+                "github_repos",
+                "github_repos",
+                "github_repos",
+                "github_repos",
+                "github_repos",
+                "github_repos",
+                "analytics",
+                "analytics",
+            ],
+            "dependency_name": [
+                "commits",
+                "commits",
+                "commits",
+                "commits",
+                "languages",
+                "licenses",
+                "author",
+                "committer",
+            ],
+        }
+    )

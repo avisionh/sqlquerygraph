@@ -1,4 +1,6 @@
+from typing import Union
 import pandas as pd
+import numpy as np
 
 
 def convert_dict_to_df(data: dict) -> pd.DataFrame:
@@ -21,3 +23,25 @@ def convert_dict_to_df(data: dict) -> pd.DataFrame:
     data = data.sort_values(by="table")
 
     return data[["table", "dependency"]]
+
+
+def separate_dataset_table(data: Union[pd.Series, pd.DataFrame]) -> pd.DataFrame:
+    """
+    Separates string of <dataset>.<table_name> into dataset and table name.
+    :param data: Dataframe with columns to separate string entries into dataset and table name.
+    :return: Dataframe with columns for dataset and table name.
+    """
+    if isinstance(data, pd.Series):
+        cols = "table"
+    else:
+        cols = data.columns
+
+    for col in cols:
+        col_names = [f"{col}_dataset", f"{col}_name"]
+        # remove backslashes and split on period
+        data[col] = data[col].str.replace(pat="\\", repl="", regex=True)
+        data[col_names] = data[col].str.split(pat=".", n=1, expand=True)
+        # remove full column
+        data = data.drop(columns=col)
+
+    return data
