@@ -57,7 +57,14 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
    username: neo4j
    password: neo4j
    ```
-   You can leave the other fields blank. neo4j will then prompt you to change your password. Change it to whatever you please.
+   You can leave the other fields blank. neo4j will then prompt you to change your password. Change it to whatever you please and the new password will persist the next time you run neo4j locally.
+1. When you have finished playing with your local neo4j instance, remember to stop it running by executing the below in your shell/terminal:
+   ```shell script
+   # find name of container running
+   docker ps
+   # stop container running
+   docker stop sqlquerygraph_neo4j_1
+   ```
 
 ***
 
