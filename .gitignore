@@ -21,3 +21,8 @@ __pycache__/
 
 # outputs
 *.html
+
+# neo4j
+data/databases/*
+data/transactions/*
+logs/*
