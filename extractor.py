@@ -170,6 +170,8 @@ class Extractor:
             ]
             tables = sorted(list(set(table_from + table_join)))
 
+            if verbose:
+                print(f"Extracted table names are {tables}...\n")
             # store in dictionary
             dicts[f"{self.schema}.{file_name}"] = tables
 

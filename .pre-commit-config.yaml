@@ -5,7 +5,6 @@ repos:
     rev: 3.9.2
     hooks:
     -   id: flake8
-        args: ["src"]
 -   repo: https://github.com/psf/black
     rev: 21.5b1 # Replace by any tag/version: https://github.com/psf/black/tags
     hooks:
