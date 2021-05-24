@@ -14,10 +14,8 @@ To run the code in here, ensure your system meets the following requirements:
 - Unix-like operating system (macOS, Linux, ...) - though it might work on Windows;
 - Python 3.8 or above; and
 - [Poetry](https://python-poetry.org/docs/) installed.
-<!--
 - [`direnv`](https://direnv.net/) installed, including shell hooks;
 - [`.envrc`](https://github.com/avisionh/sqlquerygraph/blob/main/.envrc) allowed/trusted by `direnv` to use the environment variables - see [below](#allowingtrusting-envrc);
--->
 
 <!--Note there may be some Python IDE-specific requirements around loading environment variables, which are not considered here. -->
 
@@ -57,7 +55,11 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
    username: neo4j
    password: neo4j
    ```
-   You can leave the other fields blank. neo4j will then prompt you to change your password. Change it to whatever you please and the new password will persist the next time you run neo4j locally.
+   You can leave the other fields blank. neo4j will then prompt you to change your password. Change it to whatever you please, `<your_password>`, and `<your_password>` will persist the next time you run neo4j locally.
+1. Create a new file, `.secrets` and store the following in there. This ensures the next time to run your local neo4j instance or do stuff in Cypher Shell like import the example data into the database, it will use your new password.
+   ```shell script
+   export NEO4J_PASSWORD=<your_password>
+   ```
 1. When you have finished playing with your local neo4j instance, remember to stop it running by executing the below in your shell/terminal:
    ```shell script
    # find name of container running

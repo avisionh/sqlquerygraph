@@ -15,7 +15,7 @@ services:
       - ./plugins:/plugins
     environment:
       NEO4j_dbms.security.auth_enabled: 'true'
-      NEO4j_AUTH: 'neo4j/neo4j'
+      NEO4j_AUTH: 'neo4j/${NEO4J_PASSWORD}'
       # Raise memory limits
       NEO4J_dbms_memory_pagecache_size: 2G
       NEO4J_dbms.memory.heap.initial_size: 2G
