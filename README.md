@@ -1,5 +1,6 @@
 # sqlquerygraph
 [![build status](https://github.com/avisionh/sqlquerygraph/workflows/pytesting/badge.svg)](https://github.com/avisionh/sqlqueryraph/actions)
+[![codecov](https://codecov.io/gh/avisionh/sqlquerygraph/branch/main/graph/badge.svg?token=8TD296ECEE)](https://codecov.io/gh/avisionh/sqlquerygraph)
 [![](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![CodeFactor](https://www.codefactor.io/repository/github/avisionh/sqlquerygraph/badge)](https://www.codefactor.io/repository/github/avisionh/sqlquerygraph)
 [![License: MIT](https://img.shields.io/badge/License-MIT-informational.svg)](https://opensource.org/licenses/MIT)
