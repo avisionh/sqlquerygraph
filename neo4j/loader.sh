@@ -1,6 +1,9 @@
 # enter docker neo4j instance
-docker exec -it sqlquerygraph_neo4j_1 bash
-cypher-shell -u neo4j -p ${NEO4J_PASSWORD}
+docker exec -it neo4j bash
+cypher-shell -u neo4j -p "${NEO4J_PASSWORD}"
+
+# use default neo4j database
+:use neo4j
 
 # run cypher code
 

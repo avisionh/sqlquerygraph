@@ -45,28 +45,27 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
     + For Mac OSX, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-mac/install/).
     + For Linux, install Docker [here](https://docs.docker.com/engine/install/) and then follow these [instructions](https://docs.docker.com/compose/install/) to install docker-compose.
     + For Windows, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-windows/install/).
+1. Create a new file, `.secrets`, in the directory where this `README.md` file sits, and store the following in there. This allows you to set the password for your local neo4j instance without exposing it.
+   ```shell script
+   export NEO4J_AUTH=neo4j/<your_password>
+   ```
 1. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
     ```shell script
     docker-compose up -d
     ```
 1. If it's the first time you have downloaded the neo4j docker image, wait awhile (maybe an hour, depends on your machine specs). If you have downloaded the neo4j docker image before (such as going through these instructions), then wait a few minutes. Then launch neo4j locally via opening your web browser and entering the following web address:
     - http://localhost:7474/browser/
-1. The default username and password will be:
+1. The username and password will be:
    ```
    username: neo4j
-   password: neo4j
-   ```
-   You can leave the other fields blank. neo4j will then prompt you to change your password. Change it to whatever you please, `<your_password>`, and `<your_password>` will persist the next time you run neo4j locally.
-1. Create a new file, `.secrets` and store the following in there. This ensures the next time to run your local neo4j instance or do stuff in Cypher Shell like import the example data into the database, it will use your new password.
-   ```shell script
-   export NEO4J_PASSWORD=<your_password>
+   password: <your_password>
    ```
 1. When you have finished playing with your local neo4j instance, remember to stop it running by executing the below in your shell/terminal:
    ```shell script
-   # find name of container running
+   # see name of container running, which most likely is called 'neo4j'
    docker ps
    # stop container running
-   docker stop sqlquerygraph_neo4j_1
+   docker stop neo4j
    ```
 
 ***

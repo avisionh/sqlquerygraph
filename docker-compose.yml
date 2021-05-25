@@ -3,7 +3,9 @@ version: '3'
 services:
   neo4j:
     image: neo4j:latest
+    container_name: neo4j
     restart: unless-stopped
+    env_file: .env
     ports:
       - 7474:7474
       - 7687:7687
@@ -13,9 +15,11 @@ services:
       - ./import:/import
       - ./logs:/logs
       - ./plugins:/plugins
+      # move repo files across
+      - ./.env:/.env
+      - ./neo4j:/neo4j
     environment:
       NEO4j_dbms.security.auth_enabled: 'true'
-      NEO4j_AUTH: 'neo4j/${NEO4J_PASSWORD}'
       # Raise memory limits
       NEO4J_dbms_memory_pagecache_size: 2G
       NEO4J_dbms.memory.heap.initial_size: 2G
