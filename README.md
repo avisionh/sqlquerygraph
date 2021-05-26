@@ -1,5 +1,6 @@
 # sqlquerygraph
 [![build status](https://github.com/avisionh/sqlquerygraph/workflows/pytesting/badge.svg)](https://github.com/avisionh/sqlqueryraph/actions)
+[![codecov](https://codecov.io/gh/avisionh/sqlquerygraph/branch/main/graph/badge.svg?token=8TD296ECEE)](https://codecov.io/gh/avisionh/sqlquerygraph)
 [![](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![CodeFactor](https://www.codefactor.io/repository/github/avisionh/sqlquerygraph/badge)](https://www.codefactor.io/repository/github/avisionh/sqlquerygraph)
 [![License: MIT](https://img.shields.io/badge/License-MIT-informational.svg)](https://opensource.org/licenses/MIT)
@@ -14,10 +15,8 @@ To run the code in here, ensure your system meets the following requirements:
 - Unix-like operating system (macOS, Linux, ...) - though it might work on Windows;
 - Python 3.8 or above; and
 - [Poetry](https://python-poetry.org/docs/) installed.
-<!--
 - [`direnv`](https://direnv.net/) installed, including shell hooks;
 - [`.envrc`](https://github.com/avisionh/sqlquerygraph/blob/main/.envrc) allowed/trusted by `direnv` to use the environment variables - see [below](#allowingtrusting-envrc);
--->
 
 <!--Note there may be some Python IDE-specific requirements around loading environment variables, which are not considered here. -->
 
@@ -46,24 +45,27 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
     + For Mac OSX, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-mac/install/).
     + For Linux, install Docker [here](https://docs.docker.com/engine/install/) and then follow these [instructions](https://docs.docker.com/compose/install/) to install docker-compose.
     + For Windows, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-windows/install/).
+1. Create a new file, `.secrets`, in the directory where this `README.md` file sits, and store the following in there. This allows you to set the password for your local neo4j instance without exposing it.
+   ```shell script
+   export NEO4J_AUTH=neo4j/<your_password>
+   ```
 1. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
     ```shell script
     docker-compose up -d
     ```
 1. If it's the first time you have downloaded the neo4j docker image, wait awhile (maybe an hour, depends on your machine specs). If you have downloaded the neo4j docker image before (such as going through these instructions), then wait a few minutes. Then launch neo4j locally via opening your web browser and entering the following web address:
     - http://localhost:7474/browser/
-1. The default username and password will be:
+1. The username and password will be:
    ```
    username: neo4j
-   password: neo4j
+   password: <your_password>
    ```
-   You can leave the other fields blank. neo4j will then prompt you to change your password. Change it to whatever you please and the new password will persist the next time you run neo4j locally.
 1. When you have finished playing with your local neo4j instance, remember to stop it running by executing the below in your shell/terminal:
    ```shell script
-   # find name of container running
+   # see name of container running, which most likely is called 'neo4j'
    docker ps
    # stop container running
-   docker stop sqlquerygraph_neo4j_1
+   docker stop neo4j
    ```
 
 ***
