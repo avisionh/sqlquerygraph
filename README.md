@@ -55,7 +55,7 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
    ```shell script
    direnv allow
    ```
-1. Download and the neo4j image. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
+1. Download the neo4j image. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
     ```shell script
     docker-compose up
     ```
