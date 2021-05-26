@@ -16,7 +16,7 @@ To run the code in here, ensure your system meets the following requirements:
 - Python 3.8 or above; and
 - [Poetry](https://python-poetry.org/docs/) installed.
 - [`direnv`](https://direnv.net/) installed, including shell hooks;
-- [`.envrc`](https://github.com/avisionh/sqlquerygraph/blob/main/.envrc) allowed/trusted by `direnv` to use the environment variables - see [below](#allowingtrusting-envrc);
+- [`.envrc`](https://github.com/avisionh/sqlquerygraph/blob/main/.envrc) allowed/trusted by `direnv` to use the environment variables - see [below](#set-up);
 
 <!--Note there may be some Python IDE-specific requirements around loading environment variables, which are not considered here. -->
 
@@ -46,15 +46,28 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
     + For Linux, install Docker [here](https://docs.docker.com/engine/install/) and then follow these [instructions](https://docs.docker.com/compose/install/) to install docker-compose.
     + For Windows, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-windows/install/).
 1. Create a new file, `.secrets`, in the directory where this `README.md` file sits, and store the following in there. This allows you to set the password for your local neo4j instance without exposing it.
-   ```shell script
-   export NEO4J_AUTH=neo4j/<your_password>
    ```
-1. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
+   export NEO4J_AUTH=neo4j/<your_password>
+   export NEO4J_AUTH=neo4j
+   export NEO4J_AUTH=<your_password>
+   ```
+1. Update your `.env` file to take in the new `.secrets` file you created by entering the below in your shell/terminal:
+   ```shell script
+   direnv allow
+   ```
+1. Download and the neo4j image. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
     ```shell script
-    docker-compose up -d
+    docker-compose up
     ```
-1. If it's the first time you have downloaded the neo4j docker image, wait awhile (maybe an hour, depends on your machine specs). If you have downloaded the neo4j docker image before (such as going through these instructions), then wait a few minutes. Then launch neo4j locally via opening your web browser and entering the following web address:
-    - http://localhost:7474/browser/
+1. If it's the first time you have downloaded the neo4j docker image, wait awhile (maybe an hour, depends on your machine specs). If you have downloaded the neo4j docker image before (such as going through these instructions), then wait a few minutes. You will know when it's ready when you get the following message in your terminal:
+   ```
+   ...
+   neo4j    | 2021-05-26 06:40:15.270+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+   neo4j    | 2021-05-26 06:40:16.412+0000 INFO  Remote interface available at http://localhost:7474/
+   neo4j    | 2021-05-26 06:40:16.414+0000 INFO  Started.
+   ```
+   Then launch neo4j locally via opening your web browser and entering the following web address:
+    - http://localhost:7474/
 1. The username and password will be:
    ```
    username: neo4j
@@ -65,7 +78,7 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
    # see name of container running, which most likely is called 'neo4j'
    docker ps
    # stop container running
-   docker stop neo4j
+   docker stop <name_of_container>
    ```
 
 ***
