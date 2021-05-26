@@ -10,6 +10,8 @@ Parse your SQL queries and represent their structure as a graph.
 
 Currently, we implement the ability of representing how each of the tables in a set of SQL query scripts depend on each other.
 
+![](./guide/img/table_dependency.png)
+
 ## Requirements
 To run the code in here, ensure your system meets the following requirements:
 - Unix-like operating system (macOS, Linux, ...) - though it might work on Windows;
@@ -85,3 +87,5 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
 
 ## Acknowledgements
 This builds on the excellent [moz-sql-parser](https://github.com/mozilla/moz-sql-parser) package.
+
+With thanks also to the [Google Cloud Public Dataset Program](https://cloud.google.com/solutions/datasets) for which the SQL queries in this repo are based off the program's [GitHub repos](https://console.cloud.google.com/marketplace/product/github/github-repos) dataset.
