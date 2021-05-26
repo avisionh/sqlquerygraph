@@ -12,11 +12,10 @@ services:
       - 7474:7474
       - 7687:7687
     volumes:
-      - ./data:/data
-      # cannot move files to import folder in neo4j because it's read-only
+      # cannot move files to import/ folder in neo4j because it's read-only
       # https://neo4j.com/docs/operations-manual/current/configuration/file-locations/
-      # but can move from docker neo4j bash terminal...(next step)
-      - ./imports:/import
+      # but can move from docker neo4j bash terminal
+      - ./neo4j:/data
     environment:
       - NEO4j_dbms.security.auth_enabled='true'
       # Raise memory limits
