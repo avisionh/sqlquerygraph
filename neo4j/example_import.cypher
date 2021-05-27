@@ -3,7 +3,7 @@ CREATE CONSTRAINT table_name_ConstraintReporting ON (r:Reporting)
 ASSERT r.table_name IS UNIQUE;
 CREATE CONSTRAINT table_name_ConstraintAnalytics ON (a:Analytics)
 ASSERT a.table_name IS UNIQUE;
-CREATE CONSTRAINT table_name_ConstraintRaw ON (g:GithubRepos)
+CREATE CONSTRAINT table_name_ConstraintGithubRepos ON (g:GithubRepos)
 ASSERT g.table_name IS UNIQUE;
 
 // Create table nodes to join later
@@ -34,3 +34,17 @@ CREATE (a1)-[:HAS_TABLE_DEPENDENCY {import_datetime: datetime()}]->(a2);
 MERGE (a:Analytics {table_name: toString(csvLine.table_name), table_dataset: toString(csvLine.table_dataset)})
 MERGE (g:GithubRepos {table_name: toString(csvLine.dependency_name), table_dataset: toString(csvLine.dependency_dataset)})
 CREATE (a)-[:HAS_TABLE_DEPENDENCY {import_datetime: datetime()}]->(g);
+
+// Delete all nodes with relationships
+MATCH (a)-[r]->()
+DELETE a, r;
+
+// Delete all nodes with no relationships
+MATCH (a)
+DELETE a;
+
+// Drop constraints and correspondingly, index
+call db.constraints
+DROP CONSTRAINT table_name_ConstraintReporting;
+DROP CONSTRAINT table_name_ConstraintAnalytics;
+DROP CONSTRAINT table_name_ConstraintGithubRepos;
