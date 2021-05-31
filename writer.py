@@ -15,7 +15,7 @@ def create_query_constraint(datasets: list, dir_file: str) -> str:
         )
         cypher.append(query_constraint)
 
-    cypher = " ".join(cypher)
+    cypher = "".join(cypher)
     with open(file=f"{dir_file}/query_constraints.cypher", mode="w") as f:
         f.write(cypher)
 
@@ -37,8 +37,36 @@ def create_query_node_import(datasets: list, dir_file: str) -> str:
             f"CREATE (:{name} {{table_name: toString(csvLine.table_name), table_dataset: toString(csvLine.table_dataset), import_datetime: datetime()}});\n"  # noqa: E501
         )
         cypher.append(query_nodes)
-    cypher = " ".join(cypher)
+    cypher = "".join(cypher)
     with open(file=f"{dir_file}/query_nodes.cypher", mode="w") as f:
+        f.write(cypher)
+
+    return cypher
+
+
+def create_query_relationship(datasets: list, dir_file: str) -> str:
+    """
+
+    :param datasets:
+    :param dir_file:
+    :return:
+    """
+    aliases = [txt.lower() for txt in datasets]
+    cypher = []
+    for name, alias in zip(datasets, aliases):
+        for sub_name, sub_alias in zip(datasets, aliases):
+            if name == sub_name:
+                continue
+            else:
+                query_rel = (
+                    f'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "file:///{alias}_{sub_alias}_dependency.csv" AS csvLine\n'  # noqa: E501
+                    f"MERGE ({alias}:{name} {{table_name: toString(csvLine.table_name), table_dataset: toString(csvLine.table_dataset)}})\n"  # noqa: E501
+                    f"MERGE ({sub_alias}:{sub_name} {{table_name: toString(csvLine.dependency_name), table_dataset: toString(csvLine.dependency_dataset)}})\n"  # noqa: E501
+                    f"CREATE ({alias})-[:HAS_TABLE_DEPENDENCY {{import_datetime: datetime()}}]->({sub_alias});\n"
+                )
+                cypher.append(query_rel)
+    cypher = "".join(cypher)
+    with open(file=f"{dir_file}/query_relationships.cypher", mode="w") as f:
         f.write(cypher)
 
     return cypher
