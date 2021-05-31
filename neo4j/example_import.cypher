@@ -47,4 +47,4 @@ DELETE a;
 call db.constraints
 DROP CONSTRAINT table_name_ConstraintReporting;
 DROP CONSTRAINT table_name_ConstraintAnalytics;
-DROP CONSTRAINT table_name_ConstraintGithubRepos;
+DROP CONSTRAINT table_name_ConstraintGithub_Repos;

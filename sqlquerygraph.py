@@ -96,12 +96,7 @@ if __name__ == """__main__""":
 
     print("Creating Cypher queries for neo4j database\n")
     print("*******************************************\n")
-    writer.create_query_constraint(
-        datasets=args.reference_datasets, dir_file=args.export_dir
-    )
-    writer.create_query_node_import(
-        datasets=args.reference_datasets, dir_file=args.export_dir
-    )
-    writer.create_query_relationship(
-        datasets=args.reference_datasets, dir_file=args.export_dir
-    )
+    datasets = [txt.title() for txt in args.reference_datasets]
+    writer.create_query_constraint(datasets=datasets, dir_file=args.export_dir)
+    writer.create_query_node_import(datasets=datasets, dir_file=args.export_dir)
+    writer.create_query_relationship(datasets=datasets, dir_file=args.export_dir)
