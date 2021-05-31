@@ -10,6 +10,11 @@ Parse your SQL queries and represent their structure as a graph.
 
 Currently, we implement the ability of representing how each of the tables in a set of SQL query scripts depend on each other.
 
+```cypher
+MATCH p=(r:Reporting)-[:HAS_TABLE_DEPENDENCY]->()-[:HAS_TABLE_DEPENDENCY]->()
+WHERE r.table_name='user_activity'
+RETURN p
+```
 ![](./guide/img/table_dependency.png)
 
 ## Requirements
