@@ -49,9 +49,10 @@ def create_query_node_import(datasets: list, dir_file: str) -> str:
 
 def create_query_relationship(datasets: list, dir_file: str) -> str:
     """
+    Write query to create relationship between nodes.
 
-    :param datasets:
-    :param dir_file:
+    :param datasets: List of datasets/schema to create nodes from.
+    :param dir_file: String of the directory to store Cypher query in.
     :return:
     """
     aliases = [txt.lower() for txt in datasets]
