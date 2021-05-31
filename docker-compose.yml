@@ -22,3 +22,9 @@ services:
       - NEO4J_dbms_memory_pagecache_size=2G
       - NEO4J_dbms.memory.heap.initial_size=2G
       - NEO4J_dbms_memory_heap_max__size=2G
+  import:
+    build: .
+    command: >
+      sh -c "data/loader.sh"
+    depends_on:
+      - neo4j
