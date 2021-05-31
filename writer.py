@@ -1,3 +1,6 @@
+import os
+
+
 def create_query_constraint(datasets: list, dir_file: str) -> str:
     """
     Write query to create constraints in Cypher and export as .cypher file.
@@ -55,14 +58,15 @@ def create_query_relationship(datasets: list, dir_file: str) -> str:
     cypher = []
     for name, alias in zip(datasets, aliases):
         for sub_name, sub_alias in zip(datasets, aliases):
-            if name == sub_name:
+            file_name = f"{alias}_{sub_alias}_dependency.csv"
+            if file_name not in os.listdir(path=dir_file):
                 continue
             else:
                 query_rel = (
-                    f'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "file:///{alias}_{sub_alias}_dependency.csv" AS csvLine\n'  # noqa: E501
-                    f"MERGE ({alias}:{name} {{table_name: toString(csvLine.table_name), table_dataset: toString(csvLine.table_dataset)}})\n"  # noqa: E501
-                    f"MERGE ({sub_alias}:{sub_name} {{table_name: toString(csvLine.dependency_name), table_dataset: toString(csvLine.dependency_dataset)}})\n"  # noqa: E501
-                    f"CREATE ({alias})-[:HAS_TABLE_DEPENDENCY {{import_datetime: datetime()}}]->({sub_alias});\n"
+                    f'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "file:///{file_name}" AS csvLine\n'  # noqa: E501
+                    f"MERGE (a:{name} {{table_name: toString(csvLine.table_name), table_dataset: toString(csvLine.table_dataset)}})\n"  # noqa: E501
+                    f"MERGE (b:{sub_name} {{table_name: toString(csvLine.dependency_name), table_dataset: toString(csvLine.dependency_dataset)}})\n"  # noqa: E501
+                    f"CREATE (a)-[:HAS_TABLE_DEPENDENCY {{import_datetime: datetime()}}]->(b);\n"
                 )
                 cypher.append(query_rel)
     cypher = "".join(cypher)
