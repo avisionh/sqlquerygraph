@@ -23,23 +23,21 @@ services:
       - NEO4J_dbms.memory.heap.initial_size=2G
       - NEO4J_dbms_memory_heap_max__size=2G
 
-  dataloader:
+  app:
     image: python:3.8-buster
-    container_name: dataloader
+    container_name: app
     env_file: .env
     ports:
-      - 5002:5002
+      - 8080:8080
     volumes:
       - ./neo4j:/data
       - ./import:/import
-      - ./poetry.lock:/poetry.lock
-      - ./pyproject.toml:/pyproject.toml
       - ./loader.py:/loader.py
     command: >
-      sh -c "mv data/*csv import/ &&
-             pip install poetry &&
-             poetry install &&
-             poetry run python -m loader.py --file 'data/query_constraints.cypher'"
+      sh -c "sleep 15 &&
+             mv data/*csv import/ &&
+             pip install neo4j-driver py2neo &&
+             python -m loader.py --file 'data/query_constraints.cypher'"
     links:
       - neo4j
     depends_on:
