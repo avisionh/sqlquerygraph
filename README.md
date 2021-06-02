@@ -48,7 +48,7 @@ python sqlquerygraph.py -sd 'sql' -ed 'neo4j' -rd 'github_repos' 'analytics' 're
 
 ### Run neo4j graph database
 We use [neo4j](https://neo4j.com/) for this project to visualise the dependencies between tables. To install neo4j locally using Docker Compose, follow the below instructions:
-1. Install Docker
+1. Install and open Docker
     + For Mac OSX, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-mac/install/).
     + For Linux, install Docker [here](https://docs.docker.com/engine/install/) and then follow these [instructions](https://docs.docker.com/compose/install/) to install docker-compose.
     + For Windows, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-windows/install/).

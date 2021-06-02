@@ -1,5 +1,5 @@
 # https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
-version: '3.9'
+version: '3.8'
 
 services:
   neo4j:
@@ -12,19 +12,34 @@ services:
       - 7474:7474
       - 7687:7687
     volumes:
-      # cannot move files to import/ folder in neo4j because it's read-only
-      # https://neo4j.com/docs/operations-manual/current/configuration/file-locations/
-      # but can move from docker neo4j bash terminal
-      - ./neo4j:/data
+      - type: volume
+        source: neo4j
+        target: /data
     environment:
       - NEO4j_dbms.security.auth_enabled='true'
       # Raise memory limits
       - NEO4J_dbms_memory_pagecache_size=2G
       - NEO4J_dbms.memory.heap.initial_size=2G
       - NEO4J_dbms_memory_heap_max__size=2G
-  import:
-    build: .
+
+  dataloader:
+    image: python:3.8-buster
+    container_name: dataloader
+    env_file: .env
+    volumes:
+      - type: volume
+        source: neo4j
+        target: /data
     command: >
-      sh -c "data/loader.sh"
+      sh -c "ls data &&
+             ls var/lib
+             mv data/*csv var/lib/neo4j/import/ &&
+             poetry install &&
+             python -m data/loader.py --file 'data/query_constraints.cypher'"
+    links:
+      - neo4j
     depends_on:
       - neo4j
+
+volumes:
+  neo4j:
