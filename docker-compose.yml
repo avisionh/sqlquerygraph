@@ -9,14 +9,15 @@ services:
     # pass .env file to container
     env_file: .env
     ports:
-      - 7474:7474
-      - 7687:7687
+      - 7474:7474 # web client
+      - 7687:7687 # db default port
     volumes:
-      - type: volume
-        source: neo4j
-        target: /data
+      - ./neo4j:/data
+      - ./import:/import
     environment:
       - NEO4j_dbms.security.auth_enabled='true'
+      # listen to incoming connections
+      - NEO4J_dbms.connector.bolt.listen_address=0.0.0.0:7687
       # Raise memory limits
       - NEO4J_dbms_memory_pagecache_size=2G
       - NEO4J_dbms.memory.heap.initial_size=2G
@@ -26,16 +27,19 @@ services:
     image: python:3.8-buster
     container_name: dataloader
     env_file: .env
+    ports:
+      - 5002:5002
     volumes:
-      - type: volume
-        source: neo4j
-        target: /data
+      - ./neo4j:/data
+      - ./import:/import
+      - ./poetry.lock:/poetry.lock
+      - ./pyproject.toml:/pyproject.toml
+      - ./loader.py:/loader.py
     command: >
-      sh -c "ls data &&
-             ls var/lib
-             mv data/*csv var/lib/neo4j/import/ &&
+      sh -c "mv data/*csv import/ &&
+             pip install poetry &&
              poetry install &&
-             python -m data/loader.py --file 'data/query_constraints.cypher'"
+             poetry run python -m loader.py --file 'data/query_constraints.cypher'"
     links:
       - neo4j
     depends_on:
