@@ -3,6 +3,7 @@ import argparse
 
 from extractor import Extractor
 import exporter
+import writer
 
 import numpy as np
 import pandas as pd
@@ -92,3 +93,10 @@ if __name__ == """__main__""":
     print("Exporting table dependencies for relationships\n")
     print("*******************************************\n")
     exporter.export_table_dependency(data=df, path_or_buf=args.export_dir)
+
+    print("Creating Cypher queries for neo4j database\n")
+    print("*******************************************\n")
+    datasets = [txt.title() for txt in args.reference_datasets]
+    writer.create_query_constraint(datasets=datasets, dir_file=args.export_dir)
+    writer.create_query_node_import(datasets=datasets, dir_file=args.export_dir)
+    writer.create_query_relationship(datasets=datasets, dir_file=args.export_dir)

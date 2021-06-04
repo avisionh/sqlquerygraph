@@ -4,6 +4,7 @@ import pytest
 pytest_plugins = [
     "tests.fixtures.fixture_extractor",
     "tests.fixtures.fixture_exporter",
+    "tests.fixtures.fixture_writer",
 ]
 
 

@@ -25,6 +25,10 @@ __pycache__/
 # neo4j
 data/databases/*
 data/transactions/*
+data/dbms/*
+neo4j/databases/*
+neo4j/transactions/*
+neo4j/dbms/*
 logs/*
 
 # tests / coverage reports
