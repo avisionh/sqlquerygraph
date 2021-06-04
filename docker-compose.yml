@@ -13,7 +13,7 @@ services:
       - 7687:7687 # db default port
     volumes:
       - ./neo4j:/data
-      - ./import:/import
+      - ./loader.py:/loader.py
     environment:
       - NEO4j_dbms.security.auth_enabled='true'
       # listen to incoming connections
@@ -22,26 +22,3 @@ services:
       - NEO4J_dbms_memory_pagecache_size=2G
       - NEO4J_dbms.memory.heap.initial_size=2G
       - NEO4J_dbms_memory_heap_max__size=2G
-
-  app:
-    image: python:3.8-buster
-    container_name: app
-    env_file: .env
-    ports:
-      - 8080:8080
-    volumes:
-      - ./neo4j:/data
-      - ./import:/import
-      - ./loader.py:/loader.py
-    command: >
-      sh -c "sleep 15 &&
-             mv data/*csv import/ &&
-             pip install neo4j-driver py2neo &&
-             python -m loader.py --file 'data/query_constraints.cypher'"
-    links:
-      - neo4j
-    depends_on:
-      - neo4j
-
-volumes:
-  neo4j:

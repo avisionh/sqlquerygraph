@@ -80,6 +80,16 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
    username: neo4j
    password: <your_password>
    ```
+1. Load the data into the database through entering the following in a separate terminal:
+   ```
+   docker exec -it neo4j bash
+   # move .csv files into neo4j's import/ directory
+   mv data/*csv import/
+   ```
+1. In your local terminal:
+   ```shell script
+   python -m loader.py --file 'neo4j/<name_of_cypher_file'
+   ```
 1. When you have finished playing with your local neo4j instance, remember to stop it running by executing the below in your shell/terminal:
    ```shell script
    # see name of container running, which most likely is called 'neo4j'
