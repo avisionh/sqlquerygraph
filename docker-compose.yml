@@ -1,5 +1,8 @@
 # https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
 version: '3.8'
+networks:
+  neo4j_network:
+    driver: bridge
 
 services:
   neo4j:
@@ -13,7 +16,6 @@ services:
       - 7687:7687 # db default port
     volumes:
       - ./neo4j:/data
-      - ./loader.py:/loader.py
     environment:
       - NEO4j_dbms.security.auth_enabled='true'
       # install graph-data-science plugin
@@ -25,3 +27,18 @@ services:
       - NEO4J_dbms_memory_pagecache_size=2G
       - NEO4J_dbms.memory.heap.initial_size=2G
       - NEO4J_dbms_memory_heap_max__size=2G
+    networks:
+      - neo4j_network
+
+  app:
+    build: .
+    container_name: app
+    env_file: .env
+    command: >
+      sh -c "sleep 15"
+    links:
+      - neo4j
+    depends_on:
+      - neo4j
+    networks:
+      - neo4j_network
