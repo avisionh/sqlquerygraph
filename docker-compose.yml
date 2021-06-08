@@ -34,12 +34,16 @@ services:
     build: .
     container_name: app
     env_file: .env
+    environment:
+      - WAIT_HOSTS=neo4j:7687
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
     links:
       - neo4j
     depends_on:
       - neo4j
-#    command: >
-#      sh -c "/wait-for-it.sh --neo4j:7687"
-#             && loader.py --data"
+    command: >
+      sh -c "python -m loader.py --file 'data/query_constraints.cypher'"
     networks:
       - neo4j_network
