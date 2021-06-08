@@ -34,11 +34,12 @@ services:
     build: .
     container_name: app
     env_file: .env
-    command: >
-      sh -c "sleep 15"
     links:
       - neo4j
     depends_on:
       - neo4j
+#    command: >
+#      sh -c "/wait-for-it.sh --neo4j:7687"
+#             && loader.py --data"
     networks:
       - neo4j_network
