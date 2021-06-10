@@ -10,7 +10,12 @@ import numpy as np
 import pandas as pd
 
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    filename="log/sqlquerygraph.log",
+    filemode="w",
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
 
 if __name__ == """__main__""":
     argp = argparse.ArgumentParser()
