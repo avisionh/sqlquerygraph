@@ -16,6 +16,9 @@ services:
       - ./loader.py:/loader.py
     environment:
       - NEO4j_dbms.security.auth_enabled='true'
+      # install graph-data-science plugin
+      - NEO4JLABS_PLUGINS=["apoc", "graph-data-science"]
+      - apoc.import.file.enabled=True
       # listen to incoming connections
       - NEO4J_dbms.connector.bolt.listen_address=0.0.0.0:7687
       # Raise memory limits
