@@ -14,7 +14,7 @@ logging.basicConfig(
 
 NEO4J_AUTH = (os.getenv(key="NEO4J_USERNAME"), os.getenv(key="NEO4J_PASSWORD"))
 
-g = Graph(auth=NEO4J_AUTH, host="localhost", port=7687, scheme="bolt")
+g = Graph(uri="bolt://neo4j:7687", auth=NEO4J_AUTH)
 
 
 if __name__ == """__main__""":
