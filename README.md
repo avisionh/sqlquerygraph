@@ -65,27 +65,23 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
    direnv allow
    ```
 
-1. Download the neo4j image. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
+1. Build the Docker image and launch the container. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
    ```shell script
+   docker-compose build
    docker-compose up
    ```
 
-1. If it's the first time you have downloaded the neo4j docker image, wait awhile (maybe an hour, depends on your machine specs). If you have downloaded the neo4j docker image before (such as going through these instructions), then wait a few minutes. You will know when it's ready when you get the following message in your terminal:
+1. If it's the first time you have downloaded the neo4j docker image, wait awhile (maybe 15 minutes, depends on your machine specs). If you have downloaded the neo4j docker image before (such as going through these instructions), then wait a few minutes. You will know when it's ready when you get the following message in your terminal:
    ```
-   app      | Executing data/query_relationships.cypher in neo4j
-   app      |
-   app      | *******************************************
-   app      |
-   app exited with code 0
+   app      | [INFO  wait] Host [neo4j:7687] is now available!
+   app      | [INFO  wait] --------------------------------------------------------
+   app      | [INFO  wait] docker-compose-wait - Everything's fine, the application can now start!
+   app      | [INFO  wait] --------------------------------------------------------
    ```
    Then launch neo4j locally via opening your web browser and entering the following web address:
     - http://localhost:7474/
 
-1. The username and password will be:
-   ```
-   username: neo4j
-   password: <your_password>
-   ```
+1. The username and password will those specified in your `.secrets` file.
 
 1. When you have finished playing with your local neo4j instance, remember to stop it running by executing the below in your shell/terminal:
    ```shell script
