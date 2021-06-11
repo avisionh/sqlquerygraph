@@ -15,6 +15,4 @@ RUN mkdir /app \
 
 COPY neo4j/*csv import/
 COPY neo4j/*cypher data/
-COPY ./loader.py .
-
-CMD /wait
+COPY ./loader.py ./

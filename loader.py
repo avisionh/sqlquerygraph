@@ -14,7 +14,7 @@ logging.basicConfig(
 
 NEO4J_AUTH = (os.getenv(key="NEO4J_USERNAME"), os.getenv(key="NEO4J_PASSWORD"))
 
-g = Graph(uri="bolt://host.docker.internal:7687", auth=NEO4J_AUTH)
+g = Graph(uri="bolt://neo4j:7687", auth=NEO4J_AUTH)
 
 
 if __name__ == """__main__""":
