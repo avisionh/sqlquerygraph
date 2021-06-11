@@ -1,4 +1,3 @@
-# https://thibaut-deveraux.medium.com/how-to-install-neo4j-with-docker-compose-36e3ba939af0
 version: '3.8'
 networks:
   neo4j_network:
@@ -15,7 +14,7 @@ services:
       - 7474:7474 # web client
       - 7687:7687 # db default port
     volumes:
-      - ./neo4j:/data
+      - ./neo4j:/var/lib/neo4j/import
     environment:
       - NEO4j_dbms.security.auth_enabled='true'
       # install graph-data-science plugin
@@ -41,10 +40,10 @@ services:
       - WAIT_HOST_CONNECT_TIMEOUT=30
     links:
       - neo4j
-#    depends_on:
-#      - neo4j
     command: >
       sh -c "/wait \
-             && python -m loader --file 'data/query_constraints.cypher'"
+             && python -m loader --file 'data/query_constraints.cypher' \
+             && python -m loader --file 'data/query_nodes.cypher' \
+             && python -m loader --file 'data/query_relationships.cypher'"
     networks:
       - neo4j_network
