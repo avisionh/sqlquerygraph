@@ -16,6 +16,9 @@
 # django
 __pycache__/
 
+# logs
+*.log
+
 # data
 *.csv
 

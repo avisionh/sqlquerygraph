@@ -48,15 +48,15 @@ python sqlquerygraph.py -sd 'sql' -ed 'neo4j' -rd 'github_repos' 'analytics' 're
 
 ### Run neo4j graph database
 We use [neo4j](https://neo4j.com/) for this project to visualise the dependencies between tables. To install neo4j locally using Docker Compose, follow the below instructions:
-1. Install and open Docker
+1. Install and open Docker (if already installed, just open the program).
     + For Mac OSX, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-mac/install/).
     + For Linux, install Docker [here](https://docs.docker.com/engine/install/) and then follow these [instructions](https://docs.docker.com/compose/install/) to install docker-compose.
     + For Windows, install Docker and Docker Compose together [here](https://docs.docker.com/docker-for-windows/install/).
 1. Create a new file, `.secrets`, in the directory where this `README.md` file sits, and store the following in there. This allows you to set the password for your local neo4j instance without exposing it.
    ```
    export NEO4J_AUTH=neo4j/<your_password>
-   export NEO4J_AUTH=neo4j
-   export NEO4J_AUTH=<your_password>
+   export NEO4J_USERNAME=neo4j
+   export NEO4J_PASSWORD=<your_password>
    ```
 1. Update your `.env` file to take in the new `.secrets` file you created by entering the below in your shell/terminal:
    ```shell script

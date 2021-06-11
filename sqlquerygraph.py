@@ -1,3 +1,4 @@
+import logging
 import os
 import argparse
 
@@ -8,6 +9,13 @@ import writer
 import numpy as np
 import pandas as pd
 
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename="log/sqlquerygraph.log",
+    filemode="w",
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
 
 if __name__ == """__main__""":
     argp = argparse.ArgumentParser()
@@ -55,9 +63,10 @@ if __name__ == """__main__""":
     print(subdir)
 
     for i, dataset in enumerate(subdir):
-        print(f"Extracting {dataset} tables and their dependencies from scripts\n")
-        print("*******************************************\n")
 
+        logging.info(
+            f"Extracting {dataset} tables and their dependencies from scripts\n"
+        )
         # create text to remove
         dir_report = f"{args.script_dir}/{dataset}"
         remove_txt = []
@@ -75,27 +84,23 @@ if __name__ == """__main__""":
             str_to_remove=remove_txt,
             verbose=args.verbose,
         )
-        print(f"Converting {dataset} dictionaries to dataframes\n")
-        print("*******************************************\n")
+
+        logging.info(f"Converting {dataset} dictionaries to dataframes\n")
         df_tables = exporter.convert_dict_to_df(data=table_dependencies)
         df_tables = df_tables.to_numpy()
         arr = np.concatenate((arr, df_tables), axis=0)
 
-    print("Splitting tables from their dependencies\n")
-    print("*******************************************\n")
+    logging.info("Splitting tables from their dependencies\n")
     df = pd.DataFrame(data=arr, columns=["table", "dependency"])
     df = exporter.separate_dataset_table(data=df)
 
-    print("Exporting unique table names for nodes\n")
-    print("*******************************************\n")
+    logging.info("Exporting unique table names for nodes\n")
     exporter.export_unique_names(data=df, path_or_buf=args.export_dir)
 
-    print("Exporting table dependencies for relationships\n")
-    print("*******************************************\n")
+    logging.info("Exporting table dependencies for relationships\n")
     exporter.export_table_dependency(data=df, path_or_buf=args.export_dir)
 
-    print("Creating Cypher queries for neo4j database\n")
-    print("*******************************************\n")
+    logging.info("Creating Cypher queries for neo4j database\n")
     datasets = [txt.title() for txt in args.reference_datasets]
     writer.create_query_constraint(datasets=datasets, dir_file=args.export_dir)
     writer.create_query_node_import(datasets=datasets, dir_file=args.export_dir)
