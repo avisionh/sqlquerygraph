@@ -40,9 +40,9 @@ poetry install
 pre-commit install
 ```
 
-To then extract the tables and their dependencies from the example SQL scripts in the `sql/` directory, run the following in your shell/terminal:
+To then extract the tables and their dependencies from the example SQL scripts in the `sql/` directory, run the below in your shell/terminal. It will generate `.csv` files of the tables and their dependencies. It will also generate `.cypher` files to enable you to import the data into neo4j, after you have added the `.csv` files to the database.
 ```shell script
-python sqlquerygraph.py -sd 'sql' -ed 'neo4j' -rd 'github_repos' 'analytics' 'reporting'
+python sqlquerygraph.py -sd 'sql' -ed 'neo4j' -rd '<datasets, individually quoted and separated by commas, of tables in sql/ scripts>'
 ```
 
 ### Run neo4j graph database
@@ -58,19 +58,16 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
    export NEO4J_USERNAME=neo4j
    export NEO4J_PASSWORD=<your_password>
    ```
-
-1. Update your `.env` file to take in the new `.secrets` file you created by entering the below in your shell/terminal:
+   Then update your `.env` file to take in the new `.secrets` file you created by entering the below in your shell/terminal:
    ```shell script
    direnv allow
    ```
 
 1. Build the Docker image and launch the container. Within this directory that has the `docker-compose.yml` file, run the below in your shell/terminal:
    ```shell script
-   docker-compose build
    docker-compose up
    ```
-
-1. If it's the first time you have downloaded the neo4j docker image, wait awhile (maybe 15 minutes, depends on your machine specs). If you have downloaded the neo4j docker image before (such as going through these instructions), then wait a few minutes. You will know when it's ready when you get the following message in your terminal:
+   You will know when it's ready when you get the following message in your terminal:
    ```
    app      | [INFO  wait] Host [neo4j:7687] is now available!
    app      | [INFO  wait] --------------------------------------------------------
@@ -80,7 +77,7 @@ We use [neo4j](https://neo4j.com/) for this project to visualise the dependencie
    Then launch neo4j locally via opening your web browser and entering the following web address:
     - http://localhost:7474/
 
-1. The username and password will those specified in your `.secrets` file.
+   The username and password will those specified in your `.secrets` file.
 
 1. When you have finished playing with your local neo4j instance, remember to stop it running by executing the below in your shell/terminal:
    ```shell script
