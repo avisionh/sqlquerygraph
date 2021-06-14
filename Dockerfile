@@ -26,7 +26,7 @@ RUN pip install -r requirements.txt \
     && mkdir log \
     && mkdir data \
     && mkdir neo4j \
-    && python sqlquerygraph.py -sd 'example' -ed 'neo4j' -rd 'github_repos' 'analytics' 'reporting'
+    && python sqlquerygraph.py -sd 'example/sql' -ed 'example/neo4j' -rd 'github_repos' 'analytics' 'reporting' \
     && chmod +x /wait
 
 # move relevant files so they can be executed

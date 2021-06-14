@@ -23,7 +23,6 @@ To run the code in here, ensure your system meets the following requirements:
 - Python 3.8 or above; and
 - [Poetry](https://python-poetry.org/docs/) installed.
 - [`direnv`](https://direnv.net/) installed, including shell hooks;
-- [`.envrc`](https://github.com/avisionh/sqlquerygraph/blob/main/.envrc) allowed/trusted by `direnv` to use the environment variables - see [below](#set-up);
 
 <!--Note there may be some Python IDE-specific requirements around loading environment variables, which are not considered here. -->
 

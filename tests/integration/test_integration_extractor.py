@@ -13,7 +13,7 @@ def test_extract_table_dependencies_from_queries(
     extract = [extracted_analytics, extracted_reporting]
 
     for i, schema in enumerate(schemes):
-        dir_report = f"example/{schema}"
+        dir_report = f"example/sql/{schema}"
         remove_txt = []
         for table in os.listdir(dir_report):
             table_name, _ = os.path.splitext(p=table)
