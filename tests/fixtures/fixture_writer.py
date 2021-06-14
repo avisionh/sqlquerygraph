@@ -8,7 +8,7 @@ def datasets():
 
 @pytest.fixture()
 def dir_file():
-    return "neo4j"
+    return "example/neo4j"
 
 
 @pytest.fixture()
